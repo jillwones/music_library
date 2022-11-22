@@ -36,4 +36,19 @@ describe AlbumRepository do
     expect(album.release_year).to eq('2017') 
     expect(album.artist_id).to eq('2') 
   end
+
+  it 'creates a new album record' do 
+    repo = AlbumRepository.new 
+
+    new_album = Album.new
+    new_album.title = 'New title'
+    new_album.release_year = 2000
+    new_album.artist_id = 1
+
+    repo.create(new_album)
+
+    albums = repo.all
+
+    expect(albums.last.title).to eq('New title')
+  end
 end

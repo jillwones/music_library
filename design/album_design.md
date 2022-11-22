@@ -56,6 +56,15 @@ class AlbumRepository
     # SELECT id, title, release_year, artist_id FROM albums WHERE id = $1;
     # returns a single album object
   end
+
+  # inserts a new album record
+  # takes an Album object as an argument
+  def create(album)
+    # Executes the SQL query:
+    # INSERT INTO albums (title, release_year, artist_id) VALUES($1, $2, $3);
+
+    # doesnt need to return anything
+  end
   
 end
 ```
@@ -91,6 +100,22 @@ album = repo.find(2)
 album.title # => 'Divide'
 album.release_year # => 2017
 album.artist_id # => 2
+
+# 4
+# Creates a new album record
+
+repo = AlbumRepository.new 
+
+new_album = Album.new
+new_album.title = 'New title'
+new_album.release_year = 2000
+new_album.artist_id = 1
+
+repo.create(new_album)
+
+albums = repo.all
+
+albums.last.title # => 'New title'
 ```
 
 ## 7. Reload the SQL seeds before each test run
