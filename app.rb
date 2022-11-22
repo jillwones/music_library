@@ -21,5 +21,8 @@ end
 artist = artist_repository.find(4)
 puts artist.name # outputs => Nina Simone
 
-album = album_repository.find(9)
-puts album.title # outputs => Baltimore
+album = album_repository.find(3)
+puts album.id # => 3
+puts album.title # outputs => Waterloo
+puts album.release_year # outputs => 1974
+puts album.artist_id # outputs => 2
