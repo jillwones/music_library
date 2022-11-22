@@ -20,4 +20,20 @@ describe AlbumRepository do
     expect(albums.first.release_year).to eq('2017') 
     expect(albums.first.artist_id).to eq('1')
   end
+
+  it 'returns More Life as a single album' do 
+    repo = AlbumRepository.new
+    album = repo.find(1)
+    expect(album.title).to eq('More Life') 
+    expect(album.release_year).to eq('2017') 
+    expect(album.artist_id).to eq('1') 
+  end
+
+  it 'returns Divide as a single album' do 
+    repo = AlbumRepository.new
+    album = repo.find(2)
+    expect(album.title).to eq('Divide') 
+    expect(album.release_year).to eq('2017') 
+    expect(album.artist_id).to eq('2') 
+  end
 end

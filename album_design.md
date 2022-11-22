@@ -46,9 +46,15 @@ end
 class AlbumRepository
 
   def all 
-    # Execures the SQL query:
+    # Executes the SQL query:
     # SELECT id, title, release_year, artist_id FROM albums;
     # returns an array of album objects
+  end
+
+  def find(id)
+    # Executes the SQL query:
+    # SELECT id, title, release_year, artist_id FROM albums WHERE id = $1;
+    # returns a single album object
   end
   
 end
@@ -67,6 +73,22 @@ albums.length # => 2
 albums.first.title # => 'More Life'
 albums.first.release_year # => 2017
 albums.first.artist_id # => 1
+
+# 2
+# Get a single album
+
+repo = albumRepository.new
+album = repo.find(1)
+album.name # => 'Drake'
+album.genre # => 'rap'
+
+# 3
+# Get another single album
+
+repo = albumRepository.new
+album = repo.find(2)
+album.name # => 'Ed Sheeran'
+album.genre # => 'pop'
 ```
 
 ## 7. Reload the SQL seeds before each test run

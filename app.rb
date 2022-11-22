@@ -11,12 +11,15 @@ album_repository = AlbumRepository.new
 artist_repository = ArtistRepository.new
 
 album_repository.all.each do |record|
-  p record
+  p record # outputs all records currently in albums table
 end
 
 artist_repository.all.each do |record|
-  p record
+  p record # outputs all records currently in artists table
 end
 
 artist = artist_repository.find(4)
-puts artist.name
+puts artist.name # outputs => Nina Simone
+
+album = album_repository.find(9)
+puts album.title # outputs => Baltimore
