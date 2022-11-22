@@ -58,6 +58,33 @@ class ArtistRepository
     # SELECT id, name, genre FROM artists WHERE id = $1;
     # returns a single artist
   end
+
+  # inserts a new artist record
+  # takes an Artist object as an argument
+  def create(artist)
+    # Executes the SQL query:
+    # INSERT INTO artists (name, genre) VALUES($1, $2);
+
+    # doesnt need to return anything
+  end
+
+  # deletes an artist record
+  # given its id
+  def delete(id)
+    # Executes the SQL query:
+    # DELETE FROM artists WHERE id = $1;
+
+    # returns nothing
+  end
+
+  # updates an artist record
+  # takes an Artist object
+  def update(artist)
+    # Executes the SQL query:
+    # UPDATE artists SET name = $1, genre = $2 WHERE ID = $3;
+
+    # returns nothing
+  end
   
 end
 ```
@@ -90,6 +117,51 @@ repo = ArtistRepository.new
 artist = repo.find(2)
 artist.name # => 'Ed Sheeran'
 artist.genre # => 'pop'
+
+# 4
+# creates a new artist
+
+repo = ArtistRepository.new 
+
+artist = Artist.new
+artist.name = 'Beatles'
+artist.genre = 'Pop'
+
+repo.create(artist)
+
+artists = repo.all
+
+artists.last.name # => 'Beatles'
+
+# 5
+# deletes an artist record from their id
+
+repo = ArtistRepository.new
+
+artist = repo.find(1)
+
+repo.delete(artist.id)
+
+all_artists = repo.all
+
+all_artists.first.id # => 2
+
+# 6
+# updates an artist record
+
+repo = ArtistRepository.new 
+
+artist = repo.find(1)
+
+artist.name = 'New name'
+artist.genere = 'New genre'
+
+repo.update(artist)
+
+updated_artist = repo.find(1)
+updated_artist.name # => 'New name'
+updated_artist.genre # => 'New genre'
+
 ```
 
 ## 7. Reload the SQL seeds before each test run
