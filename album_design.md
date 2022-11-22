@@ -77,18 +77,20 @@ albums.first.artist_id # => 1
 # 2
 # Get a single album
 
-repo = albumRepository.new
+repo = AlbumRepository.new
 album = repo.find(1)
-album.name # => 'Drake'
-album.genre # => 'rap'
+album.title # => 'More Life'
+album.release_year # => 2017
+album.artist_id # => 1
 
 # 3
 # Get another single album
 
-repo = albumRepository.new
+repo = AlbumRepository.new
 album = repo.find(2)
-album.name # => 'Ed Sheeran'
-album.genre # => 'pop'
+album.title # => 'Divide'
+album.release_year # => 2017
+album.artist_id # => 2
 ```
 
 ## 7. Reload the SQL seeds before each test run
