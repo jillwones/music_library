@@ -19,4 +19,19 @@ describe ArtistRepository do
     expect(artists.first.name).to eq('Drake') 
     expect(artists.first.genre).to eq('rap') 
   end
+
+  it 'returns Drake as a single artist' do 
+    repo = ArtistRepository.new
+    artist = repo.find(1)
+    expect(artist.name).to eq('Drake') 
+    expect(artist.genre).to eq('rap') 
+  end
+
+  it 'returns Ed Sheeran as a single artist' do 
+    repo = ArtistRepository.new
+    artist = repo.find(2)
+    expect(artist.name).to eq('Ed Sheeran') 
+    expect(artist.genre).to eq('pop') 
+  end
+
 end

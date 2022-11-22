@@ -10,7 +10,6 @@ DatabaseConnection.connect('music_library')
 album_repository = AlbumRepository.new
 artist_repository = ArtistRepository.new
 
-# Print out each record from the result set .
 album_repository.all.each do |record|
   p record
 end
@@ -18,3 +17,6 @@ end
 artist_repository.all.each do |record|
   p record
 end
+
+artist = artist_repository.find(4)
+puts artist.name
