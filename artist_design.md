@@ -1,4 +1,4 @@
-# Album Model and Repository Classes Design Recipe
+# Artist Model and Repository Classes Design Recipe
 
 ## 1. Design and create the Table
 
@@ -6,16 +6,26 @@ Skipping this step as the tables have already been created for this exercise.
 
 ## 2. Create Test SQL seeds
 
-Skipping this step as the SQL seed was provided for this exercise.
+```sql
+TRUNCATE TABLE artists RESTART IDENTITY;
+
+INSERT INTO artists
+(name, genre)
+VALUES('Drake', 'rap');
+
+INSERT INTO artists
+(name, genre)
+VALUES('Ed Sheeran', 'pop');
+```
 
 ## 3. Define the class names
 
 ```ruby
-class Album
+class Artist
 
 end 
 
-class AlbumRepository
+class ArtistRepository
 
 end
 ```
@@ -23,8 +33,8 @@ end
 ## 4. Implement the Model class
 
 ```ruby
-class Album
-  attr_accessor :id, :title, :release_year, :artist_id
+class Artist
+  attr_accessor :id, :name, :genre
 end
 ```
 
@@ -33,12 +43,12 @@ end
 ## 5. Define the Repository Class interface
 
 ```ruby
-class AlbumRepository
+class ArtistRepository
 
   def all 
     # Execures the SQL query:
-    # SELECT id, title, release_year, artist_id FROM albums;
-    # returns an array of album objects
+    # SELECT id, name, genre FROM artists;
+    # returns an array of artist objects
   end
   
 end
@@ -48,15 +58,14 @@ end
 
 ```ruby
 # 1
-# Get all albums
+# Get all artists
 
-repo = AlbumRepository.new 
-albums = repo.all
+repo = ArtistRepository.new 
+artists = repo.all
 
-albums.length # => 12
-albums.first.title # => 'Doolittle'
-albums.first.release_year # => 1989
-albums.first.artist_id # => 1
+artists.length # => 2
+artists.first.name # => 'Drake'
+artists.first.genre # => 'rap'
 ```
 
 ## 7. Reload the SQL seeds before each test run
@@ -70,15 +79,15 @@ This is so you get a fresh table contents every time you run the test suite.
 
 # file: spec/student_repository_spec.rb
 
-def reset_albums_table
-  seed_sql = File.read('spec/seeds_albums.sql')
-  connection = PG.connect({ host: '127.0.0.1', dbname: 'albums' })
+def reset_artists_table
+  seed_sql = File.read('spec/seeds_artists.sql')
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
   connection.exec(seed_sql)
 end
 
-describe StudentRepository do
+describe ArtistRepository do
   before(:each) do 
-    reset_students_table
+    reset_artists_table
   end
 
   # (your tests will go here).
