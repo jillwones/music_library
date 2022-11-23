@@ -7,6 +7,8 @@ require_relative 'lib/artist_repository'
 # We need to give the database name to the method `connect`.
 DatabaseConnection.connect('music_library')
 
+# tasks from exercise in test driving find method section:
+
 album_repository = AlbumRepository.new
 artist_repository = ArtistRepository.new
 
