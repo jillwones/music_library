@@ -34,7 +34,11 @@ end
 
 ```ruby
 class Artist
-  attr_accessor :id, :name, :genre
+  attr_accessor :id, :name, :genre, :albums
+
+  def initialize
+    @albums = []
+  end
 end
 ```
 
@@ -85,7 +89,20 @@ class ArtistRepository
 
     # returns nothing
   end
-  
+
+  def find_with_albums(artist_id)
+    # Executes the SQL query:
+    # 'SELECT artists.id,
+          #         artists.name,
+          #         artists.genre,
+          #         albums.id AS album_id,
+          #         albums.title,
+          #         albums.release_year
+          # FROM artists
+          # JOIN albums ON albums.artist_id = artists.id
+          # WHERE artists.id = $1;'
+    # returns an artist object
+    # with array of Album objects
 end
 ```
 
@@ -161,6 +178,17 @@ repo.update(artist)
 updated_artist = repo.find(1)
 updated_artist.name # => 'New name'
 updated_artist.genre # => 'New genre'
+
+# 7
+# finds an artist and all of their albums
+
+artist = repo.find_with_albums(1)
+
+artist.name # => 'Drake'
+artist.genre # => 'rap'
+artist.albums.length # => 1
+artist.albums.first.title # => 'More Life'
+
 
 ```
 
